@@ -9,16 +9,16 @@ var util = require('util');
 var dateFormat = require('dateformat');
 // var multipart = require('connect-multiparty');
 var url = require('url');
+// 
+// var PayU = require('payu');
+// var merchant_id = "gtKFFx";
+// var salt = "eCwWELxi";
+// var payu_url = "https://test.payu.in/?mc_cid=4f8597f9d4&mc_eid=[UNIQID]&mc_cid=f48bb0a3f0&mc_eid=[UNIQID";
+// var payu = new PayU(merchant_id, salt, payu_url);
 
-var PayU = require('payu');
-var merchant_id = "gtKFFx";
-var salt = "eCwWELxi";
-var payu_url = "https://test.payu.in/?mc_cid=4f8597f9d4&mc_eid=[UNIQID]&mc_cid=f48bb0a3f0&mc_eid=[UNIQID";
-var payu = new PayU(merchant_id, salt, payu_url);
 
-
-var Client = require('node-rest-client').Client;
-var client = new Client();
+// var Client = require('node-rest-client').Client;
+// var client = new Client();
 
 //var multiparty = require('multiparty');
 
