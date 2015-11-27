@@ -1,4 +1,4 @@
-﻿var express = require('express');
+var express = require('express');
 var http = require('http');
 var path = require('path');
 var passport = require('passport');
@@ -7,25 +7,36 @@ var js2xmlparser = require("js2xmlparser");
 var fs = require('fs');
 var util = require('util');
 var dateFormat = require('dateformat');
-var multipart = require('connect-multiparty');
+// var multipart = require('connect-multiparty');
 var url = require('url');
+
+var PayU = require('payu');
+var merchant_id = "gtKFFx";
+var salt = "eCwWELxi";
+var payu_url = "https://test.payu.in/?mc_cid=4f8597f9d4&mc_eid=[UNIQID]&mc_cid=f48bb0a3f0&mc_eid=[UNIQID";
+var payu = new PayU(merchant_id, salt, payu_url);
+
+
+var Client = require('node-rest-client').Client;
+var client = new Client();
+
 //var multiparty = require('multiparty');
 
 // Start express application
 var app = express();
 
 /*MySql connection*/
-var connection = require('express-myconnection'),
-    mysql = require('mysql');
+// var connection = require('express-myconnection'),
+// mysql = require('mysql');
 
 //Database connection details
-var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'root',
-    database : 'smart_wallets'
-});
-connection.query('USE smart_wallets');
+// var connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'root',
+//     database: 'smart_wallets'
+// });
+// connection.query('USE smart_wallets');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -43,7 +54,9 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use(multipart({ uploadDir: __dirname }));
+
+
+// app.use(multipart({ uploadDir: __dirname }));
 
 // development only
 if ('development' == app.get('env')) {
@@ -55,36 +68,11 @@ if ('development' == app.get('env')) {
 // Define the strategy to be used by PassportJS
 passport.use(new LocalStrategy(
     function (username, password, done) {
-        
-        var query = "SELECT * FROM users where username = '" + username + "' and password = '" + password + "'";
-        
-        connection.query(query, function (err, rows) {
-            if (err)
-                console.log(err);
-            if (!rows.length) {
-                //return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
-                return done(null, false, { message: 'No user found.' });
-            }
-            
-            // if the user is found but the password is wrong
-            if (!(rows[0].Password == password))
-                //return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
-                return done(null, false, { message: 'Oops! Wrong password.' });
-            
-            // all is well, return successful user
-            
-            //return done(null, rows[0]);
-            var userDetails = rows[0];
-            return done(null, { name: userDetails.username, isAdmin: userDetails.isAdmin, userId: userDetails.id });
 
-        });
-        
-        //if (username === "admin" && password === "admin") // stupid example
-        //    return done(null, { name: "admin" });
-        
-        //return done(null, false, { message: 'Incorrect username.' });
+        return done(null, { name: "Balram", isAdmin: "1", userId: "1" });
+
     }
-));
+    ));
 
 
 // Serialized and deserialized methods when got from session
@@ -133,33 +121,64 @@ app.get('/', function (req, res) {
 });
 
 app.get('/getAllDocuments', auth, function (req, res) {
-    executeSqlRequest(req, res, 'call getAllDocuments();');
+    // executeSqlRequest(req, res, 'call getAllDocuments();');
 });
 
 app.post('/updateUser', auth, function (req, res) {
-    
-    var query = util.format('call updateUser(%d,\'%s\',\'%s\',%d);', 
-        req.body.user.id, req.body.user.userName, req.body.user.password, req.body.user.isAdmin);
-    
-    console.log(query);
-    connection.query(query, function (err, rows) {
-        if (err) {
-            console.log(err);
-            res.send(400);
-        }
-        res.send(200);
-    });
+
+    //     var query = util.format('call updateUser(%d,\'%s\',\'%s\',%d);',
+    //         req.body.user.id, req.body.user.userName, req.body.user.password, req.body.user.isAdmin);
+    // 
+    //     console.log(query);
+    //     connection.query(query, function (err, rows) {
+    //         if (err) {
+    //             console.log(err);
+    //             res.send(400);
+    //         }
+    //         res.send(200);
+    //     });
 });
 
 
 function executeSqlRequest(req, res, query) {
-    connection.query(query, function (err, rows) {
-        //  console.log(rows);
-        
-        if (err) // error connecting to database
-            console.log(err);
-        if (rows.length) { // user exists
-            res.send(rows);
-        }
-    });
+    // connection.query(query, function (err, rows) {
+    //     //  console.log(rows);
+    //     
+    //     if (err) // error connecting to database
+    //         console.log(err);
+    //     if (rows.length) { // user exists
+    //         res.send(rows);
+    //     }
+    // });
 }
+
+// createPayUPaymentRequest();
+// 
+// function createPayUPaymentRequest() {
+// 
+//     var paymentData = {
+//         amount: 10.00,
+//         firstname: "amit",
+//         email: "amitpatel049@gmail.com",
+//         productinfo: "test",
+//         surl: "http://localhost:3000/",
+//         furl: "http://localhost:3000/",
+//         phone: "7893047541",
+//         key: "C0Dr8m",
+//         txnid: "ffb0467973000a505ea9",
+//         hash: "b902d7b93c64511cffd07b9130e9b53c62eae04af61d2ca983844165084b4712a242d7a3bd033fca753a8a65b07ef11dcb9cae9e2bb7ffdb7fe6efffe3c41425",
+//     };
+//     
+//     // args = {
+//     //     parameters: { arg1: "hello", arg2: "world" },
+//     //     data: "<xml><arg1>hello</arg1><arg2>world</arg2></xml>"
+//     // };
+// 
+//     client.post("https://test.payu.in/_payment", paymentData, function (data, response) {
+//         // parsed response body as js object 
+//         console.log(data);
+//         // raw response 
+//         console.log(response);
+//     });
+// }
+
