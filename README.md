@@ -1,3 +1,3 @@
-﻿# LawyerDocStore
+﻿# Smart Wallet web component
 
 
