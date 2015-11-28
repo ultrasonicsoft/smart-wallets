@@ -1,6 +1,6 @@
 'use strict';
 
-mainApp.controller('MakePaymentCtrl', function ($scope, $timeout, $mdDialog, $rootScope,
+mainApp.controller('SmartPaymentsCtrl', function ($scope, $timeout, $mdDialog, $rootScope,
     $location, $http, $mdSidenav, $log, loginService, dataService) {
 
     var self = this;
