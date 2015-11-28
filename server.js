@@ -133,6 +133,7 @@ app.post('/login', passport.authenticate('local'), function (req, res) {
     res.send(req.user);
 });
 
+
 // route to log out
 app.post('/logout', function (req, res) {
     req.logOut();
@@ -201,6 +202,19 @@ app.post('/postDataToGetHash', auth, function (req, res) {
     res.send(hash);
 });
 
+app.post('/paymentResult', auth, function (req, res) {
+    console.log('response received from payU');
+    console.log(req);
+
+    res.send(200);
+});
+
+app.post('/', auth, function (req, res) {
+    console.log('response received from payU on /');
+    console.log(req);
+
+    res.send(200);
+});
 
 function executeSqlRequest(req, res, query) {
     connection.query(query, function (err, rows) {

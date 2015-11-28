@@ -39,7 +39,7 @@ mainApp.controller('SmartPaymentsCtrl', function ($scope, $timeout, $mdDialog, $
                             <input type="hidden" name="curl" value="">
                             <input type="hidden" name="udf4" value="">
                             <input type="hidden" name="txnid" value="$$txnid$$">
-                            <input type="hidden" name="furlfurl" value="http://localhost:4197/ResponseHandling.aspx">
+                            <input type="hidden" name="furlfurl" value="http://localhost:3000/#/paymentResult">
                             <input type="hidden" name="state" value="">
                             <input type="hidden" name="udf2" value="">
                             <input type="hidden" name="udf1" value="">
@@ -53,7 +53,7 @@ mainApp.controller('SmartPaymentsCtrl', function ($scope, $timeout, $mdDialog, $
                             <input type="hidden" name="hash" value="$$hash$$">
                             <input type="hidden" name="key" value="$$key$$">
                             <input type="hidden" name="pg" value="">
-                            <input type="hidden" name="surl" value="http://localhost:3000/#/paymentOptions">
+                            <input type="hidden" name="surl" value="http://localhost:3000/#/paymentResult">
                             <input type="hidden" name="firstname" value="$$firstname$$">
                             <input type="hidden" name="productinfo" value="$$productinfo$$">
                             <input type="hidden" name="phone" value="$$phone$$">

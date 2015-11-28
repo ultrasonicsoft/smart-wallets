@@ -100,6 +100,9 @@ mainApp.config(function ($routeProvider, $locationProvider, $httpProvider, toast
         }).when('/smartPayments', {
             templateUrl: 'directives/smartPayments/smartPayments.html',
             controller: 'SmartPaymentsCtrl'
+        }).when('/paymentResult', {
+            templateUrl: 'directives/paymentResult/paymentResult.html',
+            controller: 'PaymentResultCtrl'
         })
         .when('/logout', {
             templateUrl: 'directives/carousel/carousel.html',
@@ -153,5 +156,13 @@ mainApp.directive('paymentOptions', function () {
         restrict: 'E',
         templateUrl: 'directives/paymentOptions/paymentOptions.html',
         controller: 'PaymentOptionsCtrl'
+    };
+});
+
+mainApp.directive('paymentResult', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/paymentResult/paymentResult.html',
+        controller: 'paymentResultCtrl'
     };
 });
