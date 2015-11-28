@@ -20,9 +20,9 @@ mainApp.controller('SmartPaymentsCtrl', function ($scope, $timeout, $mdDialog, $
     }
 
     function makePayUPayment() {
-
+        var randomTransactionId = Math.random();
         var paymentData = {
-            transactionId: "11/28/2015 2:03:36 PM",
+            transactionId: randomTransactionId,
             amount: "10.0",
             email: "balramchavan@gmail.com",
             productInfo: 'test',
@@ -53,7 +53,7 @@ mainApp.controller('SmartPaymentsCtrl', function ($scope, $timeout, $mdDialog, $
                             <input type="hidden" name="hash" value="$$hash$$">
                             <input type="hidden" name="key" value="$$key$$">
                             <input type="hidden" name="pg" value="">
-                            <input type="hidden" name="surl" value="http://localhost:4197/ResponseHandling.aspx">
+                            <input type="hidden" name="surl" value="http://localhost:3000/#/paymentOptions">
                             <input type="hidden" name="firstname" value="$$firstname$$">
                             <input type="hidden" name="productinfo" value="$$productinfo$$">
                             <input type="hidden" name="phone" value="$$phone$$">
