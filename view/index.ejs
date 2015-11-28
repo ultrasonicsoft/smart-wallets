@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if lt IE 7]>      <html lang="en" ng-app="bcusSmartPayments" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="bcusSmartPayments" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="bcusSmartPayments" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="en" ng-app="myApp" class="no-js">
+<html lang="en" ng-app="bcusSmartPayments" class="no-js">
 <!--<![endif]-->
 <head>
     <meta charset="utf-8">
@@ -68,46 +68,11 @@
 	
     <!-- application specific js files -->
     <script src="/app.js"></script>
-    <script src="/directives/register/register.js"></script>
-    <script src="/directives/login/login.js"></script>
-    <script src="/directives/logout/logout.js"></script>
-    <script src="/directives/carousel/carousel.js"></script>
-    <script src="/directives/dashboard/dashboard.js"></script>
-    <script src="/directives/users/usersCtrl.js"></script>
-    <script src="/services/loginService.js"></script>
-    <script src="/services/dataService.js"></script>
-    
     <script src="/directives/smartPayments/smartPaymentsCtrl.js"></script>
-    <script src="/directives/paymentOptions/paymentOptionsCtrl.js"></script>
-    <script src="/directives/paymentResult/paymentResultCtrl.js"></script>
-
-    
-	 <nav class="navbar navbar-fixed-top">
-	<md-toolbar>
-                    <div class="md-toolbar-tools">
-                        <h2>
-                            <span>Seller 1 Webiste</span>
-                        </h2>
-                        <span flex></span>
-                        <div ng-if="isLoggingRequired">
-                            <login></login>
-                        </div>
-						<div ng-hide="isLoggingRequired">
-							<span class="glyphicon glyphicon-user"></span>
-							<label>Hi {{loggedInUserName}}!</label>
-
-							<md-button class="md-icon-button" ng-href="#/logout">
-								<md-tooltip>Logout</md-tooltip>
-								<md-icon md-svg-icon="assets/img/icons/MinusFilled.svg"></md-icon>
-							</md-button>
-						</div>
-                    </div>
-                </md-toolbar>
-				      </nav>
 </head>
 
 <body>
-    <header ng-controller="WebShopCtrl">
+    <header ng-controller="SmartPaymentsCtrl">
        
     </header>
     <!--[if lt IE 7]>
