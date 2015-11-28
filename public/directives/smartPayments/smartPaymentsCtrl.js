@@ -3,6 +3,9 @@
 mainApp.controller('SmartPaymentsCtrl', function ($scope, $timeout, $mdDialog, $rootScope,
     $location, $http, $mdSidenav, $log, loginService, dataService) {
 
+    var paymentDetails = $scope.data;
+    console.log(paymentDetails.key);
+    
     var self = this;
     self.allPaymentServices;
 

@@ -95,7 +95,8 @@ mainApp.config(function ($routeProvider, $locationProvider, $httpProvider, toast
                 loggedin: checkLoggedin
             }
         }).when('/paymentOptions', {
-            templateUrl: 'directives/paymentOptions/paymentOptions.html'
+            templateUrl: 'directives/paymentOptions/paymentOptions.html',
+            controller: 'PaymentOptionsCtrl'
         }).when('/smartPayments', {
             templateUrl: 'directives/smartPayments/smartPayments.html',
             controller: 'SmartPaymentsCtrl'
@@ -140,7 +141,8 @@ mainApp.directive('carouselImages', function () {
 
 mainApp.directive('smartPayments', function () {
     return {
-        restrict: 'E',
+        restrict: 'EA',
+        scope: { data: '=' },
         templateUrl: 'directives/smartPayments/smartPayments.html',
         controller: 'SmartPaymentsCtrl'
     };
@@ -149,6 +151,7 @@ mainApp.directive('smartPayments', function () {
 mainApp.directive('paymentOptions', function () {
     return {
         restrict: 'E',
-        templateUrl: 'directives/paymentOptions/paymentOptions.html'
+        templateUrl: 'directives/paymentOptions/paymentOptions.html',
+        controller: 'PaymentOptionsCtrl'
     };
 });
