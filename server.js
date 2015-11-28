@@ -3,12 +3,6 @@ var http = require('http');
 var path = require('path');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var js2xmlparser = require("js2xmlparser");
-var fs = require('fs');
-var util = require('util');
-var dateFormat = require('dateformat');
-var multipart = require('connect-multiparty');
-var url = require('url');
 var request = require('request');
 var crypto = require('crypto');
 

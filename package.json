@@ -13,9 +13,9 @@
     "express": "^3.21.2",
     "express-myconnection": "*",
     "express-validator": "^2.17.1",
-    "js2xmlparser": "^1.0.0",
     "mysql": "^2.9.0",
     "passport": "^0.3.0",
-    "passport-local": "*"
+    "passport-local": "*",
+    "request":"*"
   }
 }
