@@ -1,6 +1,6 @@
 {
   "name": "smart-payments",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Smart Payment Web component. Easiest way to integrate all payment getways in your e-commmerce website...",
   "main": "server.js",
   "author": {
