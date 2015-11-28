@@ -202,22 +202,6 @@ app.post('/postDataToGetHash', auth, function (req, res) {
 });
 
 
-app.post('/updateUser', auth, function (req, res) {
-
-    //     var query = util.format('call updateUser(%d,\'%s\',\'%s\',%d);',
-    //         req.body.user.id, req.body.user.userName, req.body.user.password, req.body.user.isAdmin);
-    // 
-    //     console.log(query);
-    //     connection.query(query, function (err, rows) {
-    //         if (err) {
-    //             console.log(err);
-    //             res.send(400);
-    //         }
-    //         res.send(200);
-    //     });
-});
-
-
 function executeSqlRequest(req, res, query) {
     connection.query(query, function (err, rows) {
 

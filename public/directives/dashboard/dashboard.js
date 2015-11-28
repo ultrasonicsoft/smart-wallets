@@ -47,7 +47,8 @@ mainApp.controller('DashboardCtrl', function ($scope, $timeout, $mdDialog, $root
         // var vPostForm = document.PostForm; vPostForm.submit();
         // var vPostForm = myEl.PostForm; vPostForm.submit();
         
-        $location.url('/makePayment');
+        $location.url('/paymentOptions');
+        // $location.url('/makePayment');
 
     }
     self.buyNow = buyNow;

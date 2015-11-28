@@ -94,6 +94,8 @@ mainApp.config(function ($routeProvider, $locationProvider, $httpProvider, toast
             resolve: {
                 loggedin: checkLoggedin
             }
+        }).when('/paymentOptions', {
+            templateUrl: 'directives/paymentOptions/paymentOptions.html'
         }).when('/makePayment', {
             templateUrl: 'directives/makePayment/makePayment.html',
             controller: 'MakePaymentCtrl'
@@ -141,5 +143,12 @@ mainApp.directive('makePayment', function () {
         restrict: 'E',
         templateUrl: 'directives/makePayment/makePayment.html',
         controller: 'MakePaymentCtrl'
+    };
+});
+
+mainApp.directive('paymentOptions', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/paymentOptions/paymentOptions.html'
     };
 });
