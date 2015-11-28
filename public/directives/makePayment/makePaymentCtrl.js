@@ -49,7 +49,7 @@ mainApp.controller('MakePaymentCtrl', function ($scope, $timeout, $mdDialog, $ro
                             </form>`;
 
 
-            var transactionId = "System.Random11/28/2015 2:03:43 PM";
+            var transactionId = "11/28/2015 2:03:36 PM";
             var amount = 10.0;
             var email = "balramchavan@gmail.com";
             var hash = data;
