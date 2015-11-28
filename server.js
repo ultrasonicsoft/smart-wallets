@@ -187,6 +187,20 @@ app.get('/getTransactionIdAndHash', auth, function (req, res) {
     res.send(hash);
 });
 
+app.post('/postDataToGetHash', auth, function (req, res) {
+    var paymentData = req.body.paymentData;
+    console.log(paymentData);
+
+    var SALT = "3sf0jURk";
+    // var SALT = "eCwWELxi";
+    var s = crypto.createHash('sha512');
+    s.update([paymentData.key, paymentData.transactionId, paymentData.amount, paymentData.productInfo, paymentData.firstName, paymentData.email, 
+    null, null, null, null, null, null, null, null, null, null, SALT].join('|'));
+    var hash = s.digest('hex');
+    console.log('Hash value: ' + hash);
+    res.send(hash);
+});
+
 
 app.post('/updateUser', auth, function (req, res) {
 
