@@ -212,8 +212,9 @@ app.post('/paymentResult', auth, function (req, res) {
 app.post('/', auth, function (req, res) {
     console.log('response received from payU on /');
     console.log(req);
-
-    res.send(200);
+    responseHtml += '<h2>Transaction Status: ' + req.body.status + ' </h2>';
+    responseHtml += '<h3>Transaction ID: ' + req.body.txnid + ' </h3>';
+    res.send(responseHtml);
 });
 
 function executeSqlRequest(req, res, query) {
