@@ -11,18 +11,6 @@ var multipart = require('connect-multiparty');
 var url = require('url');
 var request = require('request');
 var crypto = require('crypto');
-// 
-// var PayU = require('payu');
-// var merchant_id = "gtKFFx";
-// var salt = "eCwWELxi";
-// var payu_url = "https://test.payu.in/?mc_cid=4f8597f9d4&mc_eid=[UNIQID]&mc_cid=f48bb0a3f0&mc_eid=[UNIQID";
-// var payu = new PayU(merchant_id, salt, payu_url);
-
-
-// var Client = require('node-rest-client').Client;
-// var client = new Client();
-
-var multiparty = require('multiparty');
 
 // Start express application
 var app = express();
@@ -30,7 +18,6 @@ var app = express();
 /*MySql connection*/
 var connection = require('express-myconnection'),
     mysql = require('mysql');
-
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -55,8 +42,6 @@ app.use(passport.session());    // Add passport initialization
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// app.use(multipart({ uploadDir: __dirname }));
 
 // development only
 if ('development' == app.get('env')) {
@@ -111,6 +96,7 @@ passport.deserializeUser(function (user, done) {
 
 // Define a middleware function to be used for every secured routes
 var auth = function (req, res, next) {
+//TODO: uncomment this check when integrated with client
     // if (!req.isAuthenticated())
     //     res.send(401);
     // else
@@ -120,7 +106,6 @@ var auth = function (req, res, next) {
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
-
 
 // route to test if the user is logged in or not
 app.get('/loggedin', function (req, res) {
@@ -132,7 +117,6 @@ app.get('/loggedin', function (req, res) {
 app.post('/login', passport.authenticate('local'), function (req, res) {
     res.send(req.user);
 });
-
 
 // route to log out
 app.post('/logout', function (req, res) {
@@ -150,44 +134,6 @@ app.get('/getAllPaymentServices', auth, function (req, res) {
     executeSqlRequest(req, res, 'call getAllPaymentServices();');
 });
 
-app.get('/getTransactionIdAndHash', auth, function (req, res) {
-    //sha512(key|txnid|amount|productinfo|firstname|email|||||||||||SALT)
-    //         amount: 10.00,   
-    //         firstname: "amit",
-    //         email: "amitpatel049@gmail.com",
-    //         productinfo: "test",
-    //         surl: "http://localhost:3000/",
-    //         furl: "http://localhost:3000/",
-    //         phone: "7893047541",
-    //         key: "C0Dr8m",
-    //         txnid: "ffb0467973000a505ea9",
-    //         hash: "b902d7b93c64511cffd07b9130e9b53c62eae04af61d2ca983844165084b4712a242d7a3bd033fca753a8a65b07ef11dcb9cae9e2bb7ffdb7fe6efffe3c41425",
-    //     };
-
-    var txnid = "11/28/2015 2:03:36 PM";
-    var amount = 10.0;
-    var email = "balramchavan@gmail.com";
-    var productInfo = 'test';
-    var phone = "8237602116";
-    var key = "C0Dr8m";
-    var firstName = "balram";
-    
-    // var key = "C0Dr8m";
-    // // var key = "gtKFFx";
-    // var txnid = "11/28/2015 2:03:20 PM";
-    // var amount = 10.00;
-    // var productinfo = "test";
-    // var firstname = "balram";
-    // var email = "balramchavan@gmail.com";
-    var SALT = "3sf0jURk";
-    // var SALT = "eCwWELxi";
-    var s = crypto.createHash('sha512');
-    s.update([key, txnid, amount, productInfo, firstName, email, null, null, null, null, null, null, null, null, null, null, SALT].join('|'));
-    var hash = s.digest('hex');
-    console.log('Hash value: ' + hash);
-    res.send(hash);
-});
-
 app.post('/postDataToGetHash', auth, function (req, res) {
     var paymentData = req.body.paymentData;
     console.log(paymentData);
@@ -200,13 +146,6 @@ app.post('/postDataToGetHash', auth, function (req, res) {
     var hash = s.digest('hex');
     console.log('Hash value: ' + hash);
     res.send(hash);
-});
-
-app.post('/paymentResult', auth, function (req, res) {
-    console.log('response received from payU');
-    console.log(req);
-
-    res.send(200);
 });
 
 app.post('/', auth, function (req, res) {
@@ -226,37 +165,4 @@ function executeSqlRequest(req, res, query) {
             res.send(rows);
         }
     });
-}
-
-
-    
-// createPayUPaymentRequest();
-// 
-// function createPayUPaymentRequest() {
-// 
-//     var paymentData = {
-//         amount: 10.00,   
-//         firstname: "amit",
-//         email: "amitpatel049@gmail.com",
-//         productinfo: "test",
-//         surl: "http://localhost:3000/",
-//         furl: "http://localhost:3000/",
-//         phone: "7893047541",
-//         key: "C0Dr8m",
-//         txnid: "ffb0467973000a505ea9",
-//         hash: "b902d7b93c64511cffd07b9130e9b53c62eae04af61d2ca983844165084b4712a242d7a3bd033fca753a8a65b07ef11dcb9cae9e2bb7ffdb7fe6efffe3c41425",
-//     };
-//     
-//     // args = {
-//     //     parameters: { arg1: "hello", arg2: "world" },
-//     //     data: "<xml><arg1>hello</arg1><arg2>world</arg2></xml>"
-//     // };
-// 
-//     client.post("https://test.payu.in/_payment", paymentData, function (data, response) {
-//         // parsed response body as js object 
-//         console.log(data);
-//         // raw response 
-//         console.log(response);
-//     });
-// }
-
+};
