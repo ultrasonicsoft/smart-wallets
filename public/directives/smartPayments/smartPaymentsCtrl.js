@@ -3,10 +3,23 @@
 mainApp.controller('SmartPaymentsCtrl', function ($scope, $timeout, $mdDialog, $rootScope,
     $location, $http, $mdSidenav, $log, loginService, dataService) {
 
-    var paymentDetails = $scope.data;
-    console.log(paymentDetails);
-    
     var self = this;
+    // var paymentDetails = $scope.data;
+    // console.log(paymentDetails);
+    
+    //  $scope.data = {
+    //     transactionId: "11/28/2015 2:03:36 PM",
+    //     amount: "10.0",
+    //     email: "balramchavan@gmail.com",
+    //     productInfo: 'test',
+    //     phone: "8237602116",
+    //     key: "C0Dr8m",
+    //     firstName: "balram"
+    // };
+    
+    self.paymentDetails = $scope.data;
+    console.log(self.paymentDetails.transactionId);
+    
     self.allPaymentServices;
 
     function getAllPaymentServices() {
