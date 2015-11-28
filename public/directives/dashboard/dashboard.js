@@ -8,7 +8,6 @@ mainApp.controller('DashboardCtrl', function ($scope, $timeout, $mdDialog, $root
     self.loggedInUser = null;
     self.isAdmin = false;
 
-
     var postRequest = `<form id="PostForm" name="PostForm" action="https://test.payu.in/_payment" method="POST">
 
 <input type="hidden" name="lastname" value="">

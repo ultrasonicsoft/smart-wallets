@@ -10,8 +10,9 @@
     <md-list ng-cloak>
         <md-subheader class="md-no-sticky">Choose Payment Service to pay</md-subheader>
         <md-list-item ng-repeat="paymentService in ctrl.allPaymentServices">
-            <md-button>{{ paymentService.name }}</md-button>
+            <md-button ng-click="ctrl.makePayment($index)">{{ paymentService.name }}</md-button>
         </md-list-item>
         <md-divider></md-divider>
     </md-list>
+    <div id="payuForm"></div>
 </div>

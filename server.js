@@ -9,6 +9,8 @@ var util = require('util');
 var dateFormat = require('dateformat');
 var multipart = require('connect-multiparty');
 var url = require('url');
+var request = require('request');
+var crypto = require('crypto');
 // 
 // var PayU = require('payu');
 // var merchant_id = "gtKFFx";
@@ -144,8 +146,39 @@ app.get('/', function (req, res) {
 });
 
 app.get('/getAllPaymentServices', auth, function (req, res) {
-     executeSqlRequest(req, res, 'call getAllPaymentServices();');
+    executeSqlRequest(req, res, 'call getAllPaymentServices();');
 });
+
+app.get('/getTransactionIdAndHash', auth, function (req, res) {
+    //sha512(key|txnid|amount|productinfo|firstname|email|||||||||||SALT)
+    //         amount: 10.00,   
+//         firstname: "amit",
+//         email: "amitpatel049@gmail.com",
+//         productinfo: "test",
+//         surl: "http://localhost:3000/",
+//         furl: "http://localhost:3000/",
+//         phone: "7893047541",
+//         key: "C0Dr8m",
+//         txnid: "ffb0467973000a505ea9",
+//         hash: "b902d7b93c64511cffd07b9130e9b53c62eae04af61d2ca983844165084b4712a242d7a3bd033fca753a8a65b07ef11dcb9cae9e2bb7ffdb7fe6efffe3c41425",
+//     };
+
+    var key = "C0Dr8m";
+    // var key = "gtKFFx";
+    var txnid = "System.Random11/28/2015 2:03:20 PM";
+    var amount = 10.00;
+    var productinfo = "test";
+    var firstname = "balram";
+    var email = "balramchavan@gmail.com";
+    var SALT = "3sf0jURk";
+    // var SALT = "eCwWELxi";
+    var s = crypto.createHash('sha512');
+    s.update([key, txnid, amount, productinfo,firstname,email,SALT].join('|'));
+    var hash = s.digest('hex'); 
+    console.log('Hash value: ' + hash);
+    res.send(hash);
+});
+
 
 app.post('/updateUser', auth, function (req, res) {
 
@@ -165,7 +198,7 @@ app.post('/updateUser', auth, function (req, res) {
 
 function executeSqlRequest(req, res, query) {
     connection.query(query, function (err, rows) {
-        
+
         if (err) // error connecting to database
             console.log(err);
         if (rows.length) { // user exists
@@ -174,12 +207,14 @@ function executeSqlRequest(req, res, query) {
     });
 }
 
+
+    
 // createPayUPaymentRequest();
 // 
 // function createPayUPaymentRequest() {
 // 
 //     var paymentData = {
-//         amount: 10.00,
+//         amount: 10.00,   
 //         firstname: "amit",
 //         email: "amitpatel049@gmail.com",
 //         productinfo: "test",
