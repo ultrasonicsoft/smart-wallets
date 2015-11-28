@@ -2,27 +2,27 @@
 // Declare app level module which depends on views, and components
 var mainApp = angular.module('myApp',
     [
-    'ngRoute',
-    'ngAnimate',
-    'ngMaterial',
-    'toastr',
-    'ui.bootstrap',
-    'ui.grid',
-    'ui.grid.resizeColumns',
-    'ui.grid.selection',
-    'ui.grid.pinning',
-    'ui.grid.autoResize',
-    'ui.grid.selection',
-    'ui.grid.exporter',
-    'ui.grid.grouping',
-    'ngFileUpload',
-    'xeditable'
-])
+        'ngRoute',
+        'ngAnimate',
+        'ngMaterial',
+        'toastr',
+        'ui.bootstrap',
+        'ui.grid',
+        'ui.grid.resizeColumns',
+        'ui.grid.selection',
+        'ui.grid.pinning',
+        'ui.grid.autoResize',
+        'ui.grid.selection',
+        'ui.grid.exporter',
+        'ui.grid.grouping',
+        'ngFileUpload',
+        'xeditable'
+    ])
     .controller('WebShopCtrl',
         function ($rootScope, $scope, $mdSidenav, $log, $modal) {
-    $rootScope.isLoggingRequired = true;
+            $rootScope.isLoggingRequired = true;
 
-});
+        });
 
 mainApp.config(function ($routeProvider, $locationProvider, $httpProvider, toastrConfig) {
     angular.extend(toastrConfig, {
@@ -30,7 +30,7 @@ mainApp.config(function ($routeProvider, $locationProvider, $httpProvider, toast
         closeButton: true,
         closeHtml: '<button>&times;</button>',
         containerId: 'toast-container',
-        maxOpened: 0,    
+        maxOpened: 0,
         newestOnTop: true,
         positionClass: 'toast-top-center',
         preventDuplicates: false,
@@ -52,7 +52,7 @@ mainApp.config(function ($routeProvider, $locationProvider, $httpProvider, toast
                 /*$timeout(deferred.resolve, 0);*/
                 deferred.resolve();
 
-        // Not Authenticated
+            // Not Authenticated
             else {
                 $rootScope.message = 'You need to log in.';
                 //$timeout(function(){deferred.reject();}, 0);
@@ -60,7 +60,7 @@ mainApp.config(function ($routeProvider, $locationProvider, $httpProvider, toast
                 $location.url('/login');
             }
         });
-        
+
         return deferred.promise;
     };
     
@@ -82,29 +82,29 @@ mainApp.config(function ($routeProvider, $locationProvider, $httpProvider, toast
             }
         };
     });
-    
+
     $routeProvider
         .when('/', {
-        templateUrl: 'directives/carousel/carousel.html',
-        controller: 'CarouselCtrl'
-    })
+            templateUrl: 'directives/carousel/carousel.html',
+            controller: 'CarouselCtrl'
+        })
         .when('/dashboard', {
-        templateUrl: 'directives/dashboard/dashboard.html',
-        controller: 'DashboardCtrl',
-        resolve: {
-            loggedin: checkLoggedin
-        }
-    }).when('/search-document', {
-        templateUrl: 'directives/search-document/search-document.html',
-        controller: 'SearchDocumentCtrl'
-    })
+            templateUrl: 'directives/dashboard/dashboard.html',
+            controller: 'DashboardCtrl',
+            resolve: {
+                loggedin: checkLoggedin
+            }
+        }).when('/makePayment', {
+            templateUrl: 'directives/makePayment/makePayment.html',
+            controller: 'MakePaymentCtrl'
+        })
         .when('/logout', {
-        templateUrl: 'directives/carousel/carousel.html',
-        controller: 'LogoutCtrl'
-    })
+            templateUrl: 'directives/carousel/carousel.html',
+            controller: 'LogoutCtrl'
+        })
         .otherwise({
-        redirectTo: '/'
-    });
+            redirectTo: '/'
+        });
     //================================================
 }).run(function ($rootScope, $http, $location) {
     $rootScope.message = '';
@@ -136,10 +136,10 @@ mainApp.directive('carouselImages', function () {
     };
 });
 
-mainApp.directive('searchDocument', function () {
+mainApp.directive('makePayment', function () {
     return {
         restrict: 'E',
-        templateUrl: 'directives/search-document/search-document.html',
-        controller: 'SearchDocumentCtrl'
+        templateUrl: 'directives/makePayment/makePayment.html',
+        controller: 'MakePaymentCtrl'
     };
 });

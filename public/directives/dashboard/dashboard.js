@@ -45,8 +45,10 @@ mainApp.controller('DashboardCtrl', function ($scope, $timeout, $mdDialog, $root
 
         var myEl = angular.element(document.querySelector('#payuForm'));
         myEl.append(postRequest);
-        var vPostForm = document.PostForm; vPostForm.submit();
+        // var vPostForm = document.PostForm; vPostForm.submit();
         // var vPostForm = myEl.PostForm; vPostForm.submit();
+        
+        $location.url('/makePayment');
 
     }
     self.buyNow = buyNow;

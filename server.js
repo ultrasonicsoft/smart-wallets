@@ -143,8 +143,8 @@ app.get('/', function (req, res) {
     res.render('index');
 });
 
-app.get('/getAllDocuments', auth, function (req, res) {
-    // executeSqlRequest(req, res, 'call getAllDocuments();');
+app.get('/getAllPaymentServices', auth, function (req, res) {
+     executeSqlRequest(req, res, 'call getAllPaymentServices();');
 });
 
 app.post('/updateUser', auth, function (req, res) {
@@ -164,15 +164,14 @@ app.post('/updateUser', auth, function (req, res) {
 
 
 function executeSqlRequest(req, res, query) {
-    // connection.query(query, function (err, rows) {
-    //     //  console.log(rows);
-    //     
-    //     if (err) // error connecting to database
-    //         console.log(err);
-    //     if (rows.length) { // user exists
-    //         res.send(rows);
-    //     }
-    // });
+    connection.query(query, function (err, rows) {
+        
+        if (err) // error connecting to database
+            console.log(err);
+        if (rows.length) { // user exists
+            res.send(rows);
+        }
+    });
 }
 
 // createPayUPaymentRequest();
