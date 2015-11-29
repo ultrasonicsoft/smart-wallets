@@ -1,7 +1,41 @@
-<md-list ng-controller="DashboardCtrl as ctrl" ng-cloak>
+<div ng-controller="DashboardCtrl as ctrl" ng-cloak>
     <h3>Choose your payment gateway services</h3>
-    <md-list-item ng-repeat="paymentGatewayService in ctrl.paymentGatewayServices">
-        <p> {{ paymentGatewayService.name }} </p>
-        <md-checkbox class="md-secondary" ng-change="ctrl.updateSubscription(paymentGatewayService)" ng-model="paymentGatewayService.subscribed" ng-true-value="1" ng-false-value="0"></md-checkbox>
-    </md-list-item>
-</md-list>
+
+    <table>
+        <tr ng-repeat="paymentGatewayService in ctrl.paymentGatewayServices">
+            <td class="col-md-8">
+                <md-checkbox ng-change="ctrl.updateSubscription(paymentGatewayService)" ng-model="paymentGatewayService.subscribed" ng-true-value="1"
+                ng-false-value="0">{{ paymentGatewayService.name }}</md-checkbox>
+            </td>
+            <td  class="col-md-2">
+                <input type="number" step="1" min="1" max="{{ctrl.paymentGatewayServices.length}}">
+            </td>
+        </tr>
+    </table>
+
+       <!--<md-list>
+        <md-list-item ng-repeat="paymentGatewayService in ctrl.paymentGatewayServices">
+            <div class="col-md-8">
+                <p> {{ paymentGatewayService.name }} </p>
+            </div>
+
+            <div class="col-md-2">
+                <md-checkbox ng-change="ctrl.updateSubscription(paymentGatewayService)" ng-model="paymentGatewayService.subscribed" ng-true-value="1"
+                ng-false-value="0"></md-checkbox>
+            </div>
+            <div class="col-md-2">
+                <input type="number" step="1" min="1" max="{{ctrl.paymentGatewayServices.length}}">
+            </div>
+
+        </md-list-item>
+    </md-list>-->
+
+    <!--<h3>Choose display order of payment gateway services</h3>
+    <md-list>
+        <md-list-item ng-repeat="paymentGatewayService in ctrl.paymentGatewayServices">
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+
+    <!--<md-checkbox class="md-secondary" ng-change="ctrl.updateSubscription(paymentGatewayService)" ng-model="paymentGatewayService.subscribed"
+            ng-true-value="1" ng-false-value="0"></md-checkbox>-->
+</div>
