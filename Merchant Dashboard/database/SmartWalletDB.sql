@@ -62,7 +62,7 @@ CREATE TABLE `merchant_subscription` (
 
 LOCK TABLES `merchant_subscription` WRITE;
 /*!40000 ALTER TABLE `merchant_subscription` DISABLE KEYS */;
-INSERT INTO `merchant_subscription` VALUES (10,4),(20,1),(20,2),(20,4),(20,5),(30,1),(30,2),(30,3),(40,1),(40,5);
+INSERT INTO `merchant_subscription` VALUES (10,3),(20,1),(20,2),(20,4),(20,5),(30,1),(30,2),(30,3),(40,1),(40,5);
 /*!40000 ALTER TABLE `merchant_subscription` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,4 +228,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-29 11:35:48
+-- Dump completed on 2015-11-29 12:32:41
