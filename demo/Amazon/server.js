@@ -146,8 +146,11 @@ app.get('/', function (req, res) {
     res.render('index');
 });
 
-app.get('/getAllPaymentServices', auth, function (req, res) {
-    executeSqlRequest(req, res, 'call getAllPaymentServices();');
+app.get('/getAllPaymentServices/:merchantId', auth, function (req, res) {
+    // var queryData = url.parse(req.url, true).query;
+
+    console.log('Merchant Id: ' + req.params.merchantId);
+    executeSqlRequest(req, res, 'call getAllPaymentServices('+ req.params.merchantId + ');');
 });
 
 app.get('/getTransactionIdAndHash', auth, function (req, res) {

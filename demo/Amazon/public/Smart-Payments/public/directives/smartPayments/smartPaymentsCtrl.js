@@ -10,7 +10,7 @@ mainApp.controller('SmartPaymentsCtrl', function ($scope, $timeout, $mdDialog, $
     self.allPaymentServices;
 
     function getAllPaymentServices() {
-        $http.get('/getAllPaymentServices').success(function (data) {
+        $http.get('/getAllPaymentServices/' + self.paymentDetails.merchantId).success(function (data) {
             self.allPaymentServices = data[0];
             console.log(self.allPaymentServices);
 

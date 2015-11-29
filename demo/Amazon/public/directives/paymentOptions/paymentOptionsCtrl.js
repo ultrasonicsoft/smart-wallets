@@ -12,7 +12,8 @@ mainApp.controller('PaymentOptionsCtrl', function ($scope, $timeout, $mdDialog, 
         productInfo: 'test',
         phone: "8237602116",
         key: "C0Dr8m",
-        firstName: "balram"
+        firstName: "balram",
+        merchantId:1
     };
     $scope.paymentDetails = "payment data from merchant";
 });
