@@ -4,7 +4,7 @@
 Author
 Balram
 
-# Dowwnload
+# Download
 You can use this package by downloading it from below options
 
 1. Github - https://github.com/ultrasonicsoft/smart-wallets
