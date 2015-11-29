@@ -5,15 +5,17 @@ mainApp.controller('PaymentOptionsCtrl', function ($scope, $timeout, $mdDialog, 
     $location, $http, $mdSidenav, $log, loginService, dataService) {
     $scope.data = { key: "abcder" };
 
+    var price = $rootScope.price;
+    var productInfo = $rootScope.productInfo;
     $scope.data = {
         transactionId: "11/28/2015 2:03:36 PM",
-        amount: "10.0",
+        amount: price,
         email: "balramchavan@gmail.com",
-        productInfo: 'test',
+        productInfo: productInfo,
         phone: "8237602116",
         key: "C0Dr8m",
         firstName: "balram",
-        merchantId:10
+        merchantId:20
     };
     $scope.paymentDetails = "payment data from merchant";
 });

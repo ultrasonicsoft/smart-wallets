@@ -7,6 +7,9 @@ mainApp.controller('DashboardCtrl', function ($scope, $timeout, $mdDialog, $root
 
     self.loggedInUser = null;
     self.isAdmin = false;
+    self.price = 218;
+    $rootScope.price = self.price;
+    $rootScope.productInfo = "Pen Drive";
 
     var postRequest = `<form id="PostForm" name="PostForm" action="https://test.payu.in/_payment" method="POST">
 

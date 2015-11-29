@@ -23,7 +23,7 @@ mainApp.controller('SmartPaymentsCtrl', function ($scope, $timeout, $mdDialog, $
         var randomTransactionId = Math.random();
         var paymentData = {
             transactionId: randomTransactionId,
-            amount: "10.0",
+            amount: self.paymentDetails.amount,
             email: "balramchavan@gmail.com",
             productInfo: 'test',
             phone: "8237602116",
