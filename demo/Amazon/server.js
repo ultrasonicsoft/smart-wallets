@@ -41,7 +41,7 @@ var connection = mysql.createConnection({
 connection.query('USE smart_wallets');
 
 // all environments
-app.set('port', process.env.PORT || 9000);
+app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/view');
 app.set('view engine', 'ejs');
 app.use(express.favicon());
@@ -225,7 +225,7 @@ app.post('/', auth, function (req, res) {
     console.log('response received from payU on /');
     console.log(req);
     var responseHtml = '<h2>Transaction Status: ' + req.body.status + ' </h2>';
-    responseHtml += '<h3>Transaction ID: ' + req.body.txnid + ' </h3>';
+    responseHtml += '<h3>Transaction ID: ' + req.body.mihpayid + ' </h3>';
     res.send(responseHtml);
 });
 
