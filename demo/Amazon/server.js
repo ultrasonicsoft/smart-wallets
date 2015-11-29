@@ -153,6 +153,15 @@ app.get('/getAllPaymentServices/:merchantId', auth, function (req, res) {
     executeSqlRequest(req, res, 'call getAllPaymentServices('+ req.params.merchantId + ');');
 });
 
+app.get('/getMerchantId/:userId', auth, function (req, res) {
+    // var queryData = url.parse(req.url, true).query;
+
+    console.log('UserId Id: ' + req.params.userId);
+    var query = 'SELECT * FROM smart_wallets.merchant where userid = ' + req.params.userId;
+    executeSqlRequest(req, res,  query);
+});
+
+
 app.get('/getTransactionIdAndHash', auth, function (req, res) {
     //sha512(key|txnid|amount|productinfo|firstname|email|||||||||||SALT)
     //         amount: 10.00,   
