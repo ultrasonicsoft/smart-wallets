@@ -1,0 +1,21 @@
+{
+  "name": "Smart-Payments",
+  "description": "Smart Payment Web component. Easiest way to integrate all payment getways in your e-commmerce website...",
+  "main": "server.js",
+  "authors": [
+    "Balram"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "smart-payments"
+  ],
+  "homepage": "https://github.com/ultrasonicsoft/smart-wallets",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

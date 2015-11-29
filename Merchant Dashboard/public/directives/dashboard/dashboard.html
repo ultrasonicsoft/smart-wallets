@@ -1,0 +1,7 @@
+<md-list ng-controller="DashboardCtrl as ctrl" ng-cloak>
+    <h3>Choose your payment gateway services</h3>
+    <md-list-item ng-repeat="paymentGatewayService in ctrl.paymentGatewayServices">
+        <p> {{ paymentGatewayService.name }} </p>
+        <md-checkbox class="md-secondary" ng-model="paymentGatewayService.subscribed" ng-true-value="1" ng-false-value="0"></md-checkbox>
+    </md-list-item>
+</md-list>

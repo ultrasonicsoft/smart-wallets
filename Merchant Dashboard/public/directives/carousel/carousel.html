@@ -1,0 +1,7 @@
+﻿<div ng-controller="CarouselCtrl" style="height: 100%;margin-top: 75px">
+    <carousel interval="2000">
+        <slide ng-repeat="slide in slides" active="slide.active">
+            <img ng-src="{{slide.image}}" style="margin:auto;">
+        </slide>
+    </carousel>
+</div>

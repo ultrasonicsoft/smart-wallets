@@ -1,0 +1,31 @@
+{
+  "name": "Smart-Payments",
+  "description": "Smart Payment Web component. Easiest way to integrate all payment getways in your e-commmerce website...",
+  "main": "server.js",
+  "authors": [
+    "Balram"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "smart-payments"
+  ],
+  "homepage": "https://github.com/ultrasonicsoft/smart-wallets",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "23ac77adb0",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "23ac77adb000e3af3cde69626778bcc16a19f736"
+  },
+  "_source": "git://github.com/ultrasonicsoft/smart-wallets.git",
+  "_target": "*",
+  "_originalSource": "smart-payments",
+  "_direct": true
+}
