@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `smart_wallets` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `smart_wallets`;
 -- MySQL dump 10.13  Distrib 5.6.24, for Win64 (x86_64)
 --
 -- Host: localhost    Database: smart_wallets
@@ -16,6 +18,55 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `merchant`
+--
+
+DROP TABLE IF EXISTS `merchant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `merchant` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `userid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `merchant`
+--
+
+LOCK TABLES `merchant` WRITE;
+/*!40000 ALTER TABLE `merchant` DISABLE KEYS */;
+INSERT INTO `merchant` VALUES (10,'Amazon',1),(20,'Flipkart',2),(30,'Myntra',3),(40,'Jabong',4);
+/*!40000 ALTER TABLE `merchant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `merchant_subscription`
+--
+
+DROP TABLE IF EXISTS `merchant_subscription`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `merchant_subscription` (
+  `merchantId` int(11) NOT NULL,
+  `payment_service_id` int(11) NOT NULL,
+  PRIMARY KEY (`merchantId`,`payment_service_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `merchant_subscription`
+--
+
+LOCK TABLES `merchant_subscription` WRITE;
+/*!40000 ALTER TABLE `merchant_subscription` DISABLE KEYS */;
+INSERT INTO `merchant_subscription` VALUES (10,4),(20,1),(20,2),(20,4),(20,5),(30,1),(30,2),(30,3),(40,1),(40,5);
+/*!40000 ALTER TABLE `merchant_subscription` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `payment_services`
 --
 
@@ -26,7 +77,7 @@ CREATE TABLE `payment_services` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +86,7 @@ CREATE TABLE `payment_services` (
 
 LOCK TABLES `payment_services` WRITE;
 /*!40000 ALTER TABLE `payment_services` DISABLE KEYS */;
-INSERT INTO `payment_services` VALUES (1,'PayU'),(2,'PayTm'),(3,'Mobikwik'),(4,'Oxygen');
+INSERT INTO `payment_services` VALUES (1,'PayU'),(2,'PayTm'),(3,'Mobikwik'),(4,'Oxygen'),(5,'NetBanking'),(6,'DebitCard'),(7,'CreditCard'),(8,'PayPal'),(9,'COD');
 /*!40000 ALTER TABLE `payment_services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +112,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','admin',1),(2,'balram','balram',0);
+INSERT INTO `users` VALUES (1,'AmazonUser','amazon',1),(2,'FlipkartUser','flipkart',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,12 +129,89 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllPaymentServices`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllPaymentServices`(merchantId int)
 BEGIN
-	SELECT `payment_services`.`id`,
-    `payment_services`.`name`
-	FROM `smart_wallets`.`payment_services`;
+	SELECT s.id,
+    s.name
+	FROM `smart_wallets`.`payment_services` as s
+    INNER JOIN merchant_subscription ms
+    ON s.id = ms.payment_service_id
+    where ms.merchantId =  merchantId;
 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getAllPaymentServicesForMerchant` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getAllPaymentServicesForMerchant`(merchantId int)
+BEGIN
+
+select id,name,
+ Case 
+	when isnull(payment_service_id) THEN false
+	else true
+    end as subscribed
+    from 
+(select * from merchant_subscription where 
+merchant_subscription.merchantId = merchantId) as m right outer join payment_services 
+on m.payment_service_id = payment_services.id ;
+	
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getMerchantId` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getMerchantId`(userId tinyint(11))
+BEGIN
+	SELECT * FROM smart_wallets.merchant where userid =userId ;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `updatePaymentSubscription` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updatePaymentSubscription`(_merchantId int, _payment_service_id int, _status int)
+BEGIN
+	
+    IF _status  = 0 THEN
+		DELETE FROM merchant_subscription
+		WHERE merchantId = _merchantId and payment_service_id = _payment_service_id; 
+    else
+		INSERT INTO merchant_subscription
+        VALUES(_merchantId,_payment_service_id);
+	end if;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -100,4 +228,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-28 12:29:11
+-- Dump completed on 2015-11-29 11:35:48

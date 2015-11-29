@@ -224,6 +224,14 @@ app.post('/postDataToGetHash', auth, function (req, res) {
     res.send(hash);
 });
 
+app.post('/updateMerchantSubscription', auth, function (req, res) {
+    var data = req.body.paymentData;
+    console.log(data);
+
+var query = 'call updatePaymentSubscription('+ data.merchantId + ',' + data.paymentServiceId +',' + data.value + ')';
+    executeSqlRequest(req, res,  query);
+});
+
 app.post('/paymentResult', auth, function (req, res) {
     console.log('response received from payU');
     console.log(req);

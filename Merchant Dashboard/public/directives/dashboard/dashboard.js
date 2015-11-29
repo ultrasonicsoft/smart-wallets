@@ -24,7 +24,21 @@ mainApp.controller('DashboardCtrl', function ($scope, $timeout, $mdDialog, $root
             alert('error');
         });
     }
-    self.getAllPaymentServices = getAllPaymentServices;
+    function updateSubscription(selectedPaymentOption) {
 
+        var data = {
+            merchantId: $rootScope.merchantId,
+            paymentServiceId: selectedPaymentOption.id,
+            value: selectedPaymentOption.subscribed
+        };
+
+        $http.post('/updateMerchantSubscription', { paymentData: data }).success(function (data) {
+            console.log(data);
+        });
+        
+    }
+
+    self.getAllPaymentServices = getAllPaymentServices;
+    self.updateSubscription = updateSubscription;
     self.getAllPaymentServices();
 });
