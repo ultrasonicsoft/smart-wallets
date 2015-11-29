@@ -8,7 +8,7 @@
                 ng-false-value="0">{{ paymentGatewayService.name }}</md-checkbox>
             </td>
             <td  class="col-md-2">
-                <input type="number" step="1" min="1" max="{{ctrl.paymentGatewayServices.length}}">
+                <input type="number" ng-model="paymentGatewayService.displayOrder" step="1" min="1" max="{{ctrl.paymentGatewayServices.length}}">
             </td>
         </tr>
     </table>
