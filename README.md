@@ -1,4 +1,4 @@
-﻿# Smart Wallet web component
+﻿# Smart Payments Gateways web component
 
 
 Author
